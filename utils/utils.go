@@ -32,14 +32,14 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/beego/bee/config"
-	"github.com/beego/bee/internal/pkg/system"
-	beeLogger "github.com/beego/bee/logger"
-	"github.com/beego/bee/logger/colors"
+	"github.com/casbin/bee/config"
+	"github.com/casbin/bee/internal/pkg/system"
+	beeLogger "github.com/casbin/bee/logger"
+	"github.com/casbin/bee/logger/colors"
 )
 
 type tagName struct {
-	Name	string	`json:"name"`
+	Name string `json:"name"`
 }
 
 func GetBeeWorkPath() string {
@@ -521,7 +521,7 @@ func NoticeUpdateBee() {
 	beeLogger.Log.Info("Getting bee latest version...")
 	versionLast := BeeLastVersion()
 	versionNow := config.Version
-	if versionLast == ""{
+	if versionLast == "" {
 		beeLogger.Log.Warn("Get latest version err")
 		return
 	}

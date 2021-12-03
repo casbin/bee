@@ -3,7 +3,8 @@ package beegopro
 import (
 	"database/sql"
 	"errors"
-	"github.com/beego/bee/logger"
+
+	beeLogger "github.com/casbin/bee/logger"
 )
 
 type TableSchema struct {

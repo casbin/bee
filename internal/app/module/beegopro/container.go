@@ -2,16 +2,17 @@ package beegopro
 
 import (
 	"fmt"
-	"github.com/beego/bee/internal/pkg/git"
-	"github.com/beego/bee/internal/pkg/system"
-	beeLogger "github.com/beego/bee/logger"
-	"github.com/beego/bee/utils"
-	"github.com/davecgh/go-spew/spew"
-	"github.com/pelletier/go-toml"
-	"github.com/spf13/viper"
 	"io/ioutil"
 	"sync"
 	"time"
+
+	"github.com/casbin/bee/internal/pkg/git"
+	"github.com/casbin/bee/internal/pkg/system"
+	beeLogger "github.com/casbin/bee/logger"
+	"github.com/casbin/bee/utils"
+	"github.com/davecgh/go-spew/spew"
+	"github.com/pelletier/go-toml"
+	"github.com/spf13/viper"
 )
 
 const MDateFormat = "20060102_150405"
@@ -29,7 +30,7 @@ var DefaultBeegoPro = &Container{
 		ApiPrefix:     "/api",
 		EnableModule:  nil,
 		Models:        make(map[string]TextModel),
-		GitRemotePath: "https://github.com/beego/beego-pro.git",
+		GitRemotePath: "https://github.com/casbin/beego-pro.git",
 		Branch:        "master",
 		GitLocalPath:  system.BeegoHome + "/beego-pro",
 		EnableFormat:  true,

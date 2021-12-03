@@ -1,9 +1,10 @@
 package beegopro
 
 import (
-	"github.com/beego/bee/internal/pkg/utils"
-	beeLogger "github.com/beego/bee/logger"
 	"io/ioutil"
+
+	"github.com/casbin/bee/internal/pkg/utils"
+	beeLogger "github.com/casbin/bee/logger"
 )
 var CompareExcept = []string{"@BeeGenerateTime"}
 func (c *Container) GenConfig() {

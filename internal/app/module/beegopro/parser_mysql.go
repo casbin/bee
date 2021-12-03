@@ -3,8 +3,9 @@ package beegopro
 import (
 	"database/sql"
 	"fmt"
-	"github.com/beego/bee/internal/pkg/utils"
-	beeLogger "github.com/beego/bee/logger"
+
+	"github.com/casbin/bee/internal/pkg/utils"
+	beeLogger "github.com/casbin/bee/logger"
 )
 
 type MysqlParser struct {

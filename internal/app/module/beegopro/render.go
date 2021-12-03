@@ -11,8 +11,8 @@ import (
 	"github.com/flosch/pongo2"
 	"github.com/smartwalle/pongo2render"
 
-	"github.com/beego/bee/internal/pkg/system"
-	beeLogger "github.com/beego/bee/logger"
+	"github.com/casbin/bee/internal/pkg/system"
+	beeLogger "github.com/casbin/bee/logger"
 )
 
 // render
@@ -123,7 +123,7 @@ func (r *RenderFile) Exec(name string) {
 	var orgContent []byte
 	if err == nil {
 		if org, err := os.OpenFile(r.Descriptor.DstPath, os.O_RDONLY, 0666); err == nil {
-			orgContent,_ = ioutil.ReadAll(org)
+			orgContent, _ = ioutil.ReadAll(org)
 			org.Close()
 		} else {
 			beeLogger.Log.Infof("file err %s", err)
@@ -151,4 +151,3 @@ func (r *RenderFile) Exec(name string) {
 		beeLogger.Log.Infof("create file '%s' from %s", r.FlushFile, r.PackageName)
 	}
 }
-

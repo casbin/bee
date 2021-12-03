@@ -1,4 +1,4 @@
-module github.com/beego/bee
+module github.com/casbin/bee
 
 go 1.14
 

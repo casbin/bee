@@ -2,17 +2,18 @@ package hprose
 
 import (
 	"fmt"
-	"github.com/beego/bee/logger/colors"
 	"os"
 	"path"
 	"strings"
 
-	"github.com/beego/bee/cmd/commands"
-	"github.com/beego/bee/cmd/commands/api"
-	"github.com/beego/bee/cmd/commands/version"
-	"github.com/beego/bee/generate"
-	beeLogger "github.com/beego/bee/logger"
-	"github.com/beego/bee/utils"
+	"github.com/casbin/bee/logger/colors"
+
+	"github.com/casbin/bee/cmd/commands"
+	apiapp "github.com/casbin/bee/cmd/commands/api"
+	"github.com/casbin/bee/cmd/commands/version"
+	"github.com/casbin/bee/generate"
+	beeLogger "github.com/casbin/bee/logger"
+	"github.com/casbin/bee/utils"
 )
 
 var CmdHproseapp = &commands.Command{

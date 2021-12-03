@@ -16,11 +16,11 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/beego/bee/cmd/commands"
-	"github.com/beego/bee/config"
-	beeLogger "github.com/beego/bee/logger"
-	"github.com/beego/bee/logger/colors"
-	"github.com/beego/bee/utils"
+	"github.com/casbin/bee/cmd/commands"
+	"github.com/casbin/bee/config"
+	beeLogger "github.com/casbin/bee/logger"
+	"github.com/casbin/bee/logger/colors"
+	"github.com/casbin/bee/utils"
 )
 
 const verboseVersionBanner string = `%s%s______

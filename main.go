@@ -18,10 +18,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/beego/bee/cmd"
-	"github.com/beego/bee/cmd/commands"
-	"github.com/beego/bee/config"
-	"github.com/beego/bee/utils"
+	"github.com/casbin/bee/cmd"
+	"github.com/casbin/bee/cmd/commands"
+	"github.com/casbin/bee/config"
+	"github.com/casbin/bee/utils"
 )
 
 func main() {

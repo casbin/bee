@@ -1,7 +1,7 @@
 package beegopro
 
 import (
-	beeLogger "github.com/beego/bee/logger"
+	beeLogger "github.com/casbin/bee/logger"
 )
 
 type TextModel struct {
