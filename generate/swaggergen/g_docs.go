@@ -49,9 +49,10 @@ const (
 )
 
 const (
-	astTypeArray  = "array"
-	astTypeObject = "object"
-	astTypeMap    = "map"
+	astTypeArray     = "array"
+	astTypeObject    = "object"
+	astTypeMap       = "map"
+	astTypeInterface = "interface"
 )
 
 var pkgCache map[string]struct{} //pkg:controller:function:comments comments: key:value
@@ -973,6 +974,11 @@ func parseObject(d *ast.Object, k string, m *swagger.Schema, realTypes *[]string
 		if isBasicType(fmt.Sprint(t.Elt)) {
 			typeFormat := strings.Split(basicTypes[fmt.Sprint(t.Elt)], ":")
 			m.Format = typeFormat[0]
+		} else if _, ok := t.Elt.(*ast.InterfaceType); ok {
+			objectName := packageName + "." + k
+			m.Items = &swagger.Schema{
+				Ref: "#/definitions/" + objectName,
+			}
 		} else {
 			objectName := packageName + "." + fmt.Sprint(t.Elt)
 			if _, ok := rootapi.Definitions[objectName]; !ok {
@@ -1116,6 +1122,16 @@ func parseStruct(st *ast.StructType, k string, m *swagger.Schema, realTypes *[]s
 						Type:   typeFormat[0],
 						Format: typeFormat[1],
 					}
+				} else if sType == astTypeInterface {
+					//types := []string{"string", "object", "array"}
+					//var interfaceSlice []interface{}
+					//for _, t := range types {
+					//	interfaceSlice = append(interfaceSlice, t)
+					//}
+					mp.AdditionalProperties = &swagger.Propertie{
+						Type:        "string",
+						Description: "support string | class | List<class> and os on",
+					}
 				}
 			}
 			if field.Names != nil {
@@ -1232,6 +1248,9 @@ func typeAnalyser(f *ast.Field) (isSlice bool, realType, swaggerType string) {
 		if star, ok := arr.Elt.(*ast.StarExpr); ok {
 			return true, fmt.Sprint(star.X), astTypeObject
 		}
+		if _, ok := arr.Elt.(*ast.InterfaceType); ok {
+			return true, astTypeObject, astTypeObject
+		}
 		return true, fmt.Sprint(arr.Elt), astTypeObject
 	}
 	switch t := f.Type.(type) {
@@ -1250,6 +1269,8 @@ func typeAnalyser(f *ast.Field) (isSlice bool, realType, swaggerType string) {
 			return false, astTypeMap, basicTypes[val]
 		}
 		return false, val, astTypeObject
+	case *ast.InterfaceType:
+		return false, astTypeObject, astTypeInterface
 	}
 	basicType := fmt.Sprint(f.Type)
 	if object, isStdLibObject := stdlibObject[basicType]; isStdLibObject {
