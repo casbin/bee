@@ -1123,14 +1123,9 @@ func parseStruct(st *ast.StructType, k string, m *swagger.Schema, realTypes *[]s
 						Format: typeFormat[1],
 					}
 				} else if sType == astTypeInterface {
-					//types := []string{"string", "object", "array"}
-					//var interfaceSlice []interface{}
-					//for _, t := range types {
-					//	interfaceSlice = append(interfaceSlice, t)
-					//}
 					mp.AdditionalProperties = &swagger.Propertie{
 						Type:        "string",
-						Description: "support string | class | List<class> and os on",
+						Description: "support string, struct or []struct",
 					}
 				}
 			}
