@@ -157,7 +157,7 @@ func parsePackageFromDir(path string) error {
 }
 
 // GenerateDocs generates documentations for a given path.
-func GenerateDocs(curpath string) {
+func GenerateDocs(curpath string, tags []string) {
 	pkgspath := curpath
 	workspace := os.Getenv("BeeWorkspace")
 	if workspace != "" {
@@ -272,6 +272,36 @@ func GenerateDocs(curpath string) {
 		}
 		analyseControllerPkg(localName, im.Path.Value)
 	}
+
+	// fileter the controllerList by tags
+	if len(tags)>0 {
+		for _, controllerValue := range controllerList {
+			for routerPath, item := range controllerValue {
+				var tags_ []string
+				if item.Get != nil {
+					tags_ = item.Get.Tags
+				} else {
+					tags_ = item.Post.Tags
+				}
+				isContained := false
+				for _, tag := range tags {
+					for _, tag_ := range tags_{
+						if strings.EqualFold(tag, tag_) {
+							isContained = true
+							break
+						}
+					}
+					if isContained {
+						break
+					}
+				}
+				if !isContained {
+					delete(controllerValue, routerPath)
+				}
+			}
+		}
+	}
+
 	for _, d := range f.Decls {
 		switch specDecl := d.(type) {
 		case *ast.FuncDecl:

@@ -81,12 +81,30 @@ func GenerateCode(cmd *commands.Command, args []string) int {
 		beeLogger.Log.Fatal("Command is missing")
 	}
 
+	// get tags value
+	tagsIndex := -1
+	for i, arg := range args {
+		if arg == "--tags" && i+1 < len(args) {
+			tagsIndex = i + 1
+			break
+		}
+	}
+	var tags []string
+	if tagsIndex != -1 {
+		tags = strings.Split(args[tagsIndex], ",")
+		for i, str := range tags {
+			tags[i] = strings.TrimSpace(str)
+		}
+	} else {
+		tags = []string{}
+	}
+
 	gcmd := args[0]
 	switch gcmd {
 	case "scaffold":
 		scaffold(cmd, args, currpath)
 	case "docs":
-		swaggergen.GenerateDocs(currpath)
+		swaggergen.GenerateDocs(currpath, tags)
 	case "appcode":
 		appCode(cmd, args, currpath)
 	case "migration":
